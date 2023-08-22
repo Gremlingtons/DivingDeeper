@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;
     public float speed = 10f;
-    private int usage = 2; // number of uses when pressing down key
+    private int usage = 0; // number of uses when pressing down key
 
     private void Start()
     {
@@ -16,9 +16,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         // Horizontal movement
         float moveX = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(moveX * speed * Time.deltaTime, rb.velocity[1]);
+        rb.velocity = new Vector2(moveX * speed, rb.velocity[1]);
 
         // For pickup ability
         if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) && usage > 0)
