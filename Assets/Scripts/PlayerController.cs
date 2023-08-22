@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;
-    public float speed = 10f;
+    public float speed = 3f;
     private int usage = 2; // number of uses when pressing down key
 
     private void Start()
@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     {
         // Horizontal movement
         float moveX = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(moveX * speed * Time.deltaTime, rb.velocity[1]);
+        rb.velocity = new Vector2(moveX * speed, rb.velocity[1]);
 
         // For pickup ability
         if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) && usage > 0)

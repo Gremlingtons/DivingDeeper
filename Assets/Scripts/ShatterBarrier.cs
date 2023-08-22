@@ -30,9 +30,9 @@ public class ShatterBarrier : MonoBehaviour
         }
         else
         {
-            player.velocity = new Vector2(0, 0);
-            player.gravityScale = 0;
-            Debug.Log("Game Over!");
+            //player.velocity = new Vector2(0, 0);
+            //player.gravityScale = 0;
+            //Debug.Log("Game Over!");
         }
     }
 }
