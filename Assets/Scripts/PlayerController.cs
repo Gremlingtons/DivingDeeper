@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;
-    public float speed = 10f;
-    private int usage = 0; // number of uses when pressing down key
+    public float speed = 3f;
+    private int usage = 2; // number of uses when pressing down key
 
     private void Start()
     {
