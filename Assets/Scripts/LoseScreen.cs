@@ -16,7 +16,8 @@ public class LoseScreen : MonoBehaviour
         
     }
 
-    public void ShowLoseScreen(bool show) {
+    public void ShowLoseScreen(bool show)
+    {
         gameObject.SetActive(show);
     }
 }

@@ -6,7 +6,10 @@ public class ShatterBarrier : MonoBehaviour
 {
 
     Rigidbody2D player;
+    
+    [SerializeField] GameObject finalBarrier;
     [SerializeField] GameObject loseScreen;
+    [SerializeField] GameObject winScreen;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +33,10 @@ public class ShatterBarrier : MonoBehaviour
             {
                 player.velocity = new Vector2(player.velocity[0], player.velocity[1] / 8);
                 Destroy(col.gameObject);
+                if (col.gameObject.Equals(finalBarrier))
+                {
+                    winScreen.SetActive(true);
+                }
             }
             else
             {

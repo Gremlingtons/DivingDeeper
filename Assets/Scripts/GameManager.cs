@@ -44,6 +44,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void HardReset()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     public void UpdateMoney(int moneyGained)
     {
         money += moneyGained;
