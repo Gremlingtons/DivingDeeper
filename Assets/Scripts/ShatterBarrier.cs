@@ -28,11 +28,11 @@ public class ShatterBarrier : MonoBehaviour
             player.velocity = new Vector2(player.velocity[0], player.velocity[1] / 8);
             Destroy(col.gameObject);
         }
-        else
+        else if (col.gameObject.CompareTag("Barrier") & player.velocity[1] > -40 )
         {
-            //player.velocity = new Vector2(0, 0);
-            //player.gravityScale = 0;
-            //Debug.Log("Game Over!");
+            player.velocity = new Vector2(0, 0);
+            player.gravityScale = 0;
+            Debug.Log("Game Over!");
         }
     }
 }

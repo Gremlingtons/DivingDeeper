@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Barrier
   - Coin
+  - Cobweb
+  - Snare
   layers:
   - Default
   - TransparentFX

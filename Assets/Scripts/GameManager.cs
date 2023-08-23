@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 
     [Tooltip("How much money does the player have?")]
     public int money = 0;
+    public bool snared = false;
 
     private void Awake()
     {

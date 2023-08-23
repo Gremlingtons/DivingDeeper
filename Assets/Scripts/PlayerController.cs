@@ -16,16 +16,25 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log(GameManager.Instance.snared);
 
-        // Horizontal movement
-        float moveX = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(moveX * speed, rb.velocity[1]);
-
-        // For pickup ability
-        if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) && usage > 0)
+        if (GameManager.Instance.snared == false)
         {
-            rb.velocity = new Vector2(moveX * speed * Time.deltaTime, rb.velocity[1] * 2);
-            usage--;
+            // Horizontal movement
+            float moveX = Input.GetAxis("Horizontal");
+            rb.velocity = new Vector2(moveX * speed, rb.velocity[1]);
+
+            // For pickup ability
+            if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) && usage > 0)
+            {
+                rb.velocity = new Vector2(moveX * speed * Time.deltaTime, rb.velocity[1] * 2);
+                usage--;
+            }
         }
+        
     }
+
+
+    
+
 }
