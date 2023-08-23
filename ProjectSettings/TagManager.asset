@@ -8,6 +8,7 @@ TagManager:
   - Coin
   - Cobweb
   - Snare
+  - LoseScreen
   layers:
   - Default
   - TransparentFX
