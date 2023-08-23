@@ -29,4 +29,9 @@ public class GameManager : MonoBehaviour
     {
         
     }
+
+    public void TryAgain() {
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().ResetPlayer();
+        GameObject.FindGameObjectWithTag("LoseScreen").GetComponent<LoseScreen>().ShowLoseScreen(false);
+    }
 }

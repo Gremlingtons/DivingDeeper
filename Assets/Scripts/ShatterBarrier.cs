@@ -6,6 +6,7 @@ public class ShatterBarrier : MonoBehaviour
 {
 
     Rigidbody2D player;
+    [SerializeField] GameObject loseScreen;
 
     // Start is called before the first frame update
     void Start()
@@ -23,16 +24,18 @@ public class ShatterBarrier : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col)
     {
         player =  GetComponent<Rigidbody2D>();
-        if (col.gameObject.CompareTag("Barrier") & player.velocity[1] < -40 )
+        if (col.gameObject.CompareTag("Barrier"))
         {
-            player.velocity = new Vector2(player.velocity[0], player.velocity[1] / 8);
-            Destroy(col.gameObject);
-        }
-        else if (col.gameObject.CompareTag("Barrier") & player.velocity[1] > -40 )
-        {
-            player.velocity = new Vector2(0, 0);
-            player.gravityScale = 0;
-            Debug.Log("Game Over!");
+            if (player.velocity[1] < -40)
+            {
+                player.velocity = new Vector2(player.velocity[0], player.velocity[1] / 8);
+                Destroy(col.gameObject);
+            }
+            else
+            {
+                GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().PausePlayerMovement();
+                loseScreen.SetActive(true);
+            }
         }
     }
 }
