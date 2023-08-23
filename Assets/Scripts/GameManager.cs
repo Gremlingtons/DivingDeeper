@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,9 +9,10 @@ public class GameManager : MonoBehaviour
     // Singleton
     public static GameManager Instance;
     [SerializeField] GameObject obstacles;
+    [SerializeField] TMP_Text moneyText;
 
     [Tooltip("How much money does the player have?")]
-    public int money = 0;
+    private int money = 0;
     public bool snared = false;
 
     private void Awake()
@@ -40,5 +42,11 @@ public class GameManager : MonoBehaviour
         {
             child.gameObject.SetActive(true);
         }
+    }
+
+    public void UpdateMoney(int moneyGained)
+    {
+        money += moneyGained;
+        moneyText.text = "$: " + money.ToString();
     }
 }

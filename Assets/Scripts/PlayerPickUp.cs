@@ -6,11 +6,13 @@ using UnityEngine;
 public class PlayerPickUp : MonoBehaviour
 {
     [SerializeField] TMP_Text textMoney;
+    GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        UpdateMoneyText(0);
+        gameManager = GameManager.Instance;
+        gameManager.UpdateMoney(0);
     }
 
     // Update is called once per frame
@@ -23,15 +25,8 @@ public class PlayerPickUp : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Coin"))
         {
-            GameManager.Instance.money++;
+            gameManager.UpdateMoney(1);
             Destroy(col.gameObject);
-            UpdateMoneyText(GameManager.Instance.money);
         }
-
-    }
-
-    void UpdateMoneyText(int amount)
-    {
-        textMoney.text = "$: " + amount.ToString();
     }
 }

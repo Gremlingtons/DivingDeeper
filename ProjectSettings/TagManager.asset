@@ -9,6 +9,7 @@ TagManager:
   - Cobweb
   - Snare
   - LoseScreen
+  - MoneyText
   layers:
   - Default
   - TransparentFX
