@@ -3141,6 +3141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5225ccc494ee7c84b8ff96c6a802dd51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  obstacles: {fileID: 1708333166}
   money: 0
   snared: 0
 --- !u!4 &1767707482
