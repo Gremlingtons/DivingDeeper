@@ -41,13 +41,15 @@ public class PlayerController : MonoBehaviour
     }
 
     public void PausePlayerMovement() {
-        player.velocity = new Vector2(0, 0);
-        player.gravityScale = 0;
+        //player.velocity = new Vector2(0, 0);
+        //player.gravityScale = 0;
+        Time.timeScale = 0;
     }
 
     public void ResetPlayer() {
         player.position = initialPos;
-        player.gravityScale = initialGrav;
+        //player.gravityScale = initialGrav;
         remainingBoost = initialBoost;
+        Time.timeScale = 1;
     }
 }

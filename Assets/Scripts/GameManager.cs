@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     // Singleton
     public static GameManager Instance;
+    [SerializeField] GameObject obstacles;
 
     [Tooltip("How much money does the player have?")]
     public int money = 0;
@@ -13,7 +15,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (GameManager.Instance == null)
+        if (Instance == null)
         {
             Instance = this;
         }
@@ -30,8 +32,13 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void TryAgain() {
+    public void TryAgain()
+    {
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().ResetPlayer();
         GameObject.FindGameObjectWithTag("LoseScreen").GetComponent<LoseScreen>().ShowLoseScreen(false);
+        foreach(Transform child in obstacles.transform)
+        {
+            child.gameObject.SetActive(true);
+        }
     }
 }

@@ -31,7 +31,8 @@ public class Snare : MonoBehaviour
         if (col.tag == "Snare" && isActive == false)
         {
             isActive = true;
-            Destroy(col.gameObject);
+            //Destroy(col.gameObject);
+            col.gameObject.SetActive(false);
             StartCoroutine(EffectWearOff(duration));  //start the time function
         }
     }
