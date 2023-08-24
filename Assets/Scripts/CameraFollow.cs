@@ -21,19 +21,26 @@ public class CameraFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        cam = GetComponent<Camera>();
         if (target != null)
         {
-            Vector3 targetPosition = target.position + offset;
+            // Vector3 targetPosition = target.position + offset;
+            Vector3 cameraAdjust = new Vector3(0, (cam.orthographicSize - (0.25f * cam.orthographicSize)) * -1 , -10);
+            Vector3 targetPosition = target.position + cameraAdjust;
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
         }
         
-        cam = GetComponent<Camera>();
-        if  (cam.transform.position[1] > -100) {
+        
+        if  (cam.transform.position[1] > -70) {
             cam.orthographicSize =  8;
         }
-        else
+        else if (cam.transform.position[1] <= -60 & cam.transform.position[1] > -240)
         {
-            cam.orthographicSize = 8 * (cam.transform.position[1] * -1) / 100;
+            cam.orthographicSize = 8 * (cam.transform.position[1] * -1) / 70;
+        }
+         else 
+        {
+            cam.orthographicSize = 8  * (240/70);
         }
         
       
