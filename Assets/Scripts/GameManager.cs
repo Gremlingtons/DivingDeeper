@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text moneyText;
 
     [Tooltip("How much money does the player have?")]
-    private int money = 0;
+    public int money = 0;
     public bool snared = false;
 
     private void Awake()
