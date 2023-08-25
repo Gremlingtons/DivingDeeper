@@ -49,11 +49,10 @@ public class PlayerHazards : MonoBehaviour
                 break;
             case "Breakable":
                 currentSpeed = player.velocity[1];
-                Debug.Log(currentSpeed);
                 if (currentSpeed < BREAK_THRESHOLD) // OR jetpack is on
                 {
                     player.velocity = new Vector2(player.velocity[0], player.velocity[1] / 8);
-                    col.gameObject.SetActive(false);
+                    Destroy(col.gameObject);
                 }
                 else
                 {

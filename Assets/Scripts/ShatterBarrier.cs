@@ -28,7 +28,7 @@ public class ShatterBarrier : MonoBehaviour
             if (player.velocity[1] < -40)
             {
                 player.velocity = new Vector2(player.velocity[0], player.velocity[1] / 8);
-                Destroy(col.gameObject);
+                col.gameObject.SetActive(false);
                 //if (col.gameObject.Equals(finalBarrier))
                 //{
                 //    winScreen.SetActive(true);

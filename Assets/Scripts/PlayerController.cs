@@ -122,6 +122,7 @@ public class PlayerController : MonoBehaviour
     private void DashLeft(Vector2 direction)
     {
         transform.position = new Vector2(transform.position.x - (direction.x * (-1 * dashDistance)) , transform.position.y);
+        //player.velocity = new Vector2(dashDistance, player.velocity[1]);
         remainingDashes--;
         GameManager.Instance.remainingDashes = remainingDashes;
     }
@@ -141,6 +142,8 @@ public class PlayerController : MonoBehaviour
 
     public void ResetPlayer() {
         player.position = initialPos;
+        player.velocity = new Vector2(0, 0);
+
         //player.gravityScale = initialGrav;
         remainingBoost = initialBoost;
         remainingDashes = initialDashes;
