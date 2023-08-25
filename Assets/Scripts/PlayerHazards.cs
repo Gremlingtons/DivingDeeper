@@ -16,7 +16,7 @@ public class PlayerHazards : MonoBehaviour
     private bool isActive = false;
 
     // Breakable
-    private const float BREAK_THRESHOLD = -40f;
+    private const float BREAK_THRESHOLD = -30f;
 
     // Start is called before the first frame update
     void Start()
@@ -53,8 +53,17 @@ public class PlayerHazards : MonoBehaviour
                 if (currentSpeed < BREAK_THRESHOLD) // OR jetpack is on
                 {
                     player.velocity = new Vector2(player.velocity[0], player.velocity[1] / 8);
-                    Destroy(col.gameObject);
+                    col.gameObject.SetActive(false);
                 }
+                else
+                {
+                    Time.timeScale = 0;
+                    GameManager.Instance.SetLoseScreen(true);
+                }
+                break;
+            case "Spike":
+                Time.timeScale = 0;
+                GameManager.Instance.SetLoseScreen(true);
                 break;
         }
     }

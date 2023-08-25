@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     private float initialGrav;
     private int initialBoost = 2; // number of jetpack uses when pressing down key
     private int remainingBoost;
-    private int grappleUses = 49; // number of grapple uses when pressing a/d and space
+    //private int grappleUses = 49; // number of grapple uses when pressing a/d and space
     public float speed = 3f;
 
     private void Start()
@@ -41,11 +41,11 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    public void PausePlayerMovement() {
-        //player.velocity = new Vector2(0, 0);
-        //player.gravityScale = 0;
-        Time.timeScale = 0;
-    }
+    //public void PausePlayerMovement() {
+    //    //player.velocity = new Vector2(0, 0);
+    //    //player.gravityScale = 0;
+    //    Time.timeScale = 0;
+    //}
 
     public void ResetPlayer() {
         player.position = initialPos;

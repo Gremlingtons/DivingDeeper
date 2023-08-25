@@ -11,6 +11,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject obstacles;
     [SerializeField] TMP_Text moneyText;
 
+    [SerializeField] GameObject finalBarrier;
+    [SerializeField] GameObject loseScreen;
+    [SerializeField] GameObject winScreen;
+
     [Tooltip("How much money does the player have?")]
     public int money = 0;
     public bool snared = false;
@@ -53,5 +57,15 @@ public class GameManager : MonoBehaviour
     {
         money += moneyGained;
         moneyText.text = "$: " + money.ToString();
+    }
+
+    public void SetWinScreen(bool b)
+    {
+        winScreen.SetActive(b);
+    }
+
+    public void SetLoseScreen(bool b)
+    {
+        loseScreen.SetActive(b);
     }
 }
