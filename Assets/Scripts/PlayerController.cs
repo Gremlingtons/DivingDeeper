@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
             player.velocity = new Vector2(moveX * speed, player.velocity[1]);
 
             // For jetpack
-            else if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.Space)) && remainingBoost > 0)
+            if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.Space)) && remainingBoost > 0)
             {
                 player.velocity = new Vector2(moveX * speed * Time.deltaTime, player.velocity[1] * 2);
                 remainingBoost--;
