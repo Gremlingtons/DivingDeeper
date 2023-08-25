@@ -6249,16 +6249,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 1708333167}
     m_Modifications:
     - target: {fileID: 440635159638711874, guid: 705136a1c33387641a05f472d5185d20, type: 3}
-      propertyPath: m_Size.y
-      value: 1.1
+      propertyPath: m_Size.x
+      value: 0.97
       objectReference: {fileID: 0}
     - target: {fileID: 3382193062243973901, guid: 705136a1c33387641a05f472d5185d20, type: 3}
       propertyPath: m_Name
       value: Breakable
-      objectReference: {fileID: 0}
-    - target: {fileID: 4537154994763422629, guid: 705136a1c33387641a05f472d5185d20, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2.5157046
       objectReference: {fileID: 0}
     - target: {fileID: 4537154994763422629, guid: 705136a1c33387641a05f472d5185d20, type: 3}
       propertyPath: m_LocalPosition.x
