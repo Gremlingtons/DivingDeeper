@@ -12,8 +12,11 @@ public class PlayerHazards : MonoBehaviour
     float slowSpeed = 0;
 
     // Snare variables
-    private float duration = 2.0f;
+    private float duration = 1.5f;
     private bool isActive = false;
+
+    // Breakable
+    private const float BREAK_THRESHOLD = -40f;
 
     // Start is called before the first frame update
     void Start()
@@ -29,10 +32,10 @@ public class PlayerHazards : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        currentSpeed = player.velocity[1];
         switch (col.tag)
         {
             case "Cobweb":
+                currentSpeed = player.velocity[1];
                 slowSpeed = currentSpeed * slowFactor;
                 break;
             case "Snare":
@@ -45,10 +48,12 @@ public class PlayerHazards : MonoBehaviour
                 }
                 break;
             case "Breakable":
-                if (currentSpeed > 5f)
+                currentSpeed = player.velocity[1];
+                Debug.Log(currentSpeed);
+                if (currentSpeed < BREAK_THRESHOLD) // OR jetpack is on
                 {
                     player.velocity = new Vector2(player.velocity[0], player.velocity[1] / 8);
-                    //Destroy(col.gameObject);
+                    Destroy(col.gameObject);
                 }
                 break;
         }

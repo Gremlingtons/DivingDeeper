@@ -38,7 +38,6 @@ public class CameraFollow : MonoBehaviour
                 targetPosition = targetPosition + cameraOffset;
             }
             
-            Debug.Log(Mathf.Abs(target.GetComponent<Rigidbody2D>().velocity[1]));
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
         }
         

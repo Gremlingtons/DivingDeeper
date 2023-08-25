@@ -7,8 +7,9 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D player;
     private Vector2 initialPos;
     private float initialGrav;
-    private int initialBoost = 2; // number of uses when pressing down key
+    private int initialBoost = 2; // number of jetpack uses when pressing down key
     private int remainingBoost;
+    private int grappleUses = 49; // number of grapple uses when pressing a/d and space
     public float speed = 3f;
 
     private void Start()
@@ -30,8 +31,8 @@ public class PlayerController : MonoBehaviour
             float moveX = Input.GetAxis("Horizontal");
             player.velocity = new Vector2(moveX * speed, player.velocity[1]);
 
-            // For pickup ability
-            if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) && remainingBoost > 0)
+            // For jetpack
+            else if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.Space)) && remainingBoost > 0)
             {
                 player.velocity = new Vector2(moveX * speed * Time.deltaTime, player.velocity[1] * 2);
                 remainingBoost--;
