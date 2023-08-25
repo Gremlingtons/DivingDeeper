@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class JetpackItem : MonoBehaviour
 {
-    public GameObject tooltip;
     public int initialBoost = 1;
-
+    public GameObject tooltip;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +18,6 @@ public class JetpackItem : MonoBehaviour
     {
         
     }
-
 
     private void OnTriggerEnter2D(Collider2D other)
     {

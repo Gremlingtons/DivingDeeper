@@ -1814,8 +1814,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e223481153f03f4dae0cf16a1f01b7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tooltip: {fileID: 0}
   initialBoost: 1
+  tooltip: {fileID: 0}
 --- !u!1 &426254883
 GameObject:
   m_ObjectHideFlags: 0
@@ -2535,9 +2535,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 7
-  dashCooldown: 0.2
-  dashDistance: 90
-  remainingDashes: 0
+  dashSpeed: 150
+  dashDuration: 0.5
   tooltip: {fileID: 147207514}
 --- !u!58 &562998158
 CircleCollider2D:

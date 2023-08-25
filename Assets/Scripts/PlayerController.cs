@@ -16,11 +16,13 @@ public class PlayerController : MonoBehaviour
     private int remainingBoost = 0;
     
     // grapple
-    private float lastDashTime;
-    public float dashCooldown = 0.15f;
-    public float dashDistance = 100.0f;
+    private bool hasGrapple;
     private int initialDashes = 1;
-    public int remainingDashes = 0;
+    private int remainingDashes = 0;
+    public float dashSpeed = 150f;
+    public float dashDuration = 0.5f;
+    private bool isDashing = false;
+
 
     // item tooltips
     private bool isPaused;
@@ -39,15 +41,18 @@ public class PlayerController : MonoBehaviour
             AcquireJetpack(GameManager.Instance.remainingBoost);
         }
         // Check GameManager for saved grapple state
-        if (GameManager.Instance.remainingDashes > 0)
+        if (GameManager.Instance.remainingDashes  > 0)
         {
             AcquireGrapple(GameManager.Instance.remainingDashes);
+            // GameManager.Instance.UpgradeGrapple(GameManager.Instance.remainingDashes);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        float horizontalInput = Input.GetAxis("Horizontal");
         //Debug.Log(GameManager.Instance.snared);
         if (isPaused && Input.GetKeyDown(KeyCode.Space))
         {
@@ -57,35 +62,28 @@ public class PlayerController : MonoBehaviour
 
         if (GameManager.Instance.snared == false)
         {
-            // Horizontal movement
-            float moveX = Input.GetAxis("Horizontal");
-            player.velocity = new Vector2(moveX * speed, player.velocity[1]);
-
-            // For jetpack ability
-            if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) && remainingBoost > 0 && hasJetpack)
+            if (!isDashing)
             {
-                player.velocity = new Vector2(moveX * speed * Time.deltaTime, player.velocity[1] * 2);
-                remainingBoost--;
-                GameManager.Instance.remainingBoost = remainingBoost;
-            }
+                // Horizontal movement
+                float moveX = Input.GetAxis("Horizontal");
+                player.velocity = new Vector2(moveX * speed, player.velocity[1]);
 
+                // For jetpack ability
+                if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) && remainingBoost > 0 && hasJetpack)
+                {
+                    player.velocity = new Vector2(moveX * speed * Time.deltaTime, player.velocity[1] * 2);
+                    remainingBoost--;
+                    GameManager.Instance.remainingBoost = remainingBoost;
+                }
+            }
+            
             // For grapple ability
-            if (remainingDashes > 0 && Input.GetKeyDown(KeyCode.D))
+            if (remainingDashes > 0 && Input.GetKeyDown(KeyCode.LeftShift))
             {
-                if (Time.time - lastDashTime < dashCooldown)
-                {
-                    DashRight(Vector2.right);
-                }
-                lastDashTime = Time.time;
+                StartCoroutine(Dash(horizontalInput));
             }
-            if (remainingDashes > 0 && Input.GetKeyDown(KeyCode.A))
-            {
-                if (Time.time - lastDashTime < dashCooldown)
-                {
-                    DashLeft(Vector2.left);
-                }
-                lastDashTime = Time.time;
-            }
+
+        
 
         }
         
@@ -107,6 +105,7 @@ public class PlayerController : MonoBehaviour
 
     public void AcquireGrapple(int dashes)
     {
+        hasGrapple = true;
         remainingDashes = dashes;
         GameManager.Instance.remainingDashes = dashes;
     }
@@ -119,19 +118,22 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    private void DashLeft(Vector2 direction)
+    IEnumerator Dash(float direction)
     {
-        transform.position = new Vector2(transform.position.x - (direction.x * (-1 * dashDistance)) , transform.position.y);
-        //player.velocity = new Vector2(dashDistance, player.velocity[1]);
-        remainingDashes--;
-        GameManager.Instance.remainingDashes = remainingDashes;
-    }
+        if (direction == 0)
+        {
+            yield break; // Exit if no direction is being held
+        }
 
-    private void DashRight(Vector2 direction)
-    {
-        transform.position = new Vector2(transform.position.x + (direction.x * dashDistance), transform.position.y);
+        isDashing = true;
+        player.velocity = new Vector2(direction * dashSpeed, player.velocity.y);
+        
+        yield return new WaitForSeconds(dashDuration);
+
         remainingDashes--;
         GameManager.Instance.remainingDashes = remainingDashes;
+        
+        isDashing = false;
     }
 
     public void PausePlayerMovement() {

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GrappleItem : MonoBehaviour
 {
-    // public GameObject tooltipGrapple;
     public int initialDashes = 1;
     public GameObject tooltip;
 
@@ -28,7 +27,6 @@ public class GrappleItem : MonoBehaviour
             if (player != null)
             {
                 player.AcquireGrapple(initialDashes);
-
             }
             Destroy(gameObject);
 
