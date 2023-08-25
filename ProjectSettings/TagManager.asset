@@ -10,6 +10,7 @@ TagManager:
   - Snare
   - LoseScreen
   - MoneyText
+  - Breakable
   layers:
   - Default
   - TransparentFX
