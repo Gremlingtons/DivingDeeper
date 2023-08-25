@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -10,20 +9,26 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     [SerializeField] GameObject obstacles;
     [SerializeField] TMP_Text moneyText;
-
-    [SerializeField] GameObject finalBarrier;
     [SerializeField] GameObject loseScreen;
     [SerializeField] GameObject winScreen;
+
 
     [Tooltip("How much money does the player have?")]
     public int money = 0;
     public bool snared = false;
+    public int remainingBoost = 0;
+    public int remainingDashes = 0;
 
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
     // Start is called before the first frame update
@@ -59,6 +64,7 @@ public class GameManager : MonoBehaviour
         moneyText.text = "$: " + money.ToString();
     }
 
+
     public void SetWinScreen(bool b)
     {
         winScreen.SetActive(b);
@@ -68,4 +74,5 @@ public class GameManager : MonoBehaviour
     {
         loseScreen.SetActive(b);
     }
+
 }
