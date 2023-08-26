@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D player;
@@ -26,8 +27,9 @@ public class PlayerController : MonoBehaviour
 
     // item tooltips
     private bool isPaused;
+    
     // public GameObject tooltipJetpack;
-    public GameObject tooltip;
+    
 
     private void Start()
     {
@@ -56,6 +58,7 @@ public class PlayerController : MonoBehaviour
         //Debug.Log(GameManager.Instance.snared);
         if (isPaused && Input.GetKeyDown(KeyCode.Space))
         {
+            GameManager.Instance.HideTooltip();
             ResumeGame();
             return;
         }
@@ -78,7 +81,7 @@ public class PlayerController : MonoBehaviour
             }
             
             // For grapple ability
-            if (remainingDashes > 0 && Input.GetKeyDown(KeyCode.LeftShift))
+            if (remainingDashes > 0 && Input.GetKeyDown(KeyCode.LeftShift) && hasGrapple)
             {
                 StartCoroutine(Dash(horizontalInput));
             }
@@ -156,15 +159,13 @@ public class PlayerController : MonoBehaviour
     {
         isPaused = true;
         Time.timeScale = 0f;
-        // tooltip.SetActive(true);
+        
     }
 
     public void ResumeGame()
     {
         isPaused = false;
         Time.timeScale = 1f;
-        // tooltipJetPack.SetActive(false);
-        tooltip.SetActive(false);
     }
 
 }

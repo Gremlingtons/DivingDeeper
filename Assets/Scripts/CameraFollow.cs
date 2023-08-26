@@ -45,9 +45,9 @@ public class CameraFollow : MonoBehaviour
         if  (cam.transform.position[1] > -70) {
             cam.orthographicSize =  8;
         }
-        else if (cam.transform.position[1] <= -60 & cam.transform.position[1] > -240)
+        else if (cam.transform.position[1] <= -60 & cam.transform.position[1] >= -240)
         {
-            cam.orthographicSize = 8 * (cam.transform.position[1] * -1) / 70;
+            cam.orthographicSize = 8 * ((cam.transform.position[1] * -1) / 70);
         }
          else 
         {

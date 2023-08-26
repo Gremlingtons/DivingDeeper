@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text moneyText;
     [SerializeField] GameObject loseScreen;
     [SerializeField] GameObject winScreen;
+    [SerializeField] TextMeshProUGUI tooltipGrapple;
 
 
     [Tooltip("How much money does the player have?")]
@@ -18,6 +19,8 @@ public class GameManager : MonoBehaviour
     public bool snared = false;
     public int remainingBoost = 0;
     public int remainingDashes = 0;
+
+    public TextMeshProUGUI tooltipJetpack; // Tooltip text
 
     private void Awake()
     {
@@ -73,6 +76,20 @@ public class GameManager : MonoBehaviour
     public void SetLoseScreen(bool b)
     {
         loseScreen.SetActive(b);
+    }
+
+    public void ShowTooltip(string message)
+    {
+        tooltipGrapple.text = message;
+        tooltipJetpack.text = message;
+        tooltipGrapple.gameObject.SetActive(true);
+        tooltipJetpack.gameObject.SetActive(true);
+    }
+
+    public void HideTooltip()
+    {
+        tooltipGrapple.gameObject.SetActive(false);
+        tooltipJetpack.gameObject.SetActive(false);
     }
 
 

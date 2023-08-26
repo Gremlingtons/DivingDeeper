@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class JetpackItem : MonoBehaviour
 {
     public int initialBoost = 1;
-    public GameObject tooltip;
+    // public GameObject tooltip;
+    //public TextMeshProUGUI tooltipText; 
     
     // Start is called before the first frame update
     void Start()
@@ -26,13 +28,15 @@ public class JetpackItem : MonoBehaviour
             PlayerController player = other.GetComponent<PlayerController>();
             if (player != null)
             {
-                player.AcquireJetpack(initialBoost);
+                GameManager.Instance.ShowTooltip("You've picked up a jetpack! Press S to use. (press SPACE to resume)");
+                
+                player.AcquireJetpack(initialBoost); 
             }
             Destroy(gameObject);
 
             // pause and display tooltip
             player.PauseGame();
-            tooltip.SetActive(true);
+            
         }
     }
 }
