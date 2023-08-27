@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public bool snared = false;
     public int totalBoost = 0;
     public int totalDashes = 0;
-    private int death = 0;
+    private int attempts = 1;
 
     public TextMeshProUGUI tooltipJetpack; // Tooltip text
 
@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
     {
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().ResetPlayer();
         GameObject.FindGameObjectWithTag("LoseScreen").GetComponent<LoseScreen>().ShowLoseScreen(false);
-        death++;
+        attempts++;
         foreach(Transform child in obstacles.transform)
         {
             child.gameObject.SetActive(true);
@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
         winScreen.SetActive(b);
         if (b)
         {
-            winScreen.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = $"You reached the bottom in {death} attempts";
+            winScreen.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = $"You reached the bottom in {attempts} attempts";
         }
     }
 
