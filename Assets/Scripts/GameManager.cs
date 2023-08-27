@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject loseScreen;
     [SerializeField] GameObject winScreen;
     [SerializeField] TextMeshProUGUI tooltipGrapple;
+    [SerializeField] GameObject player;
 
 
     [Tooltip("How much money does the player have?")]
@@ -99,5 +100,16 @@ public class GameManager : MonoBehaviour
         tooltipJetpack.gameObject.SetActive(false);
     }
 
+    public void UpgradeJetpack()
+    {
+        totalBoost++;
+        player.GetComponent<PlayerController>().ResetJetpackUses();
+    }
+
+    public void UpgradeGrapple()
+    {
+        totalDashes++;
+        player.GetComponent<PlayerController>().ResetGrappleUses();
+    }
 
 }

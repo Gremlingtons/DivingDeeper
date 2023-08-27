@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 
@@ -15,6 +16,7 @@ public class PlayerController : MonoBehaviour
     public GameObject jetpackShop;
     private bool hasJetpack;
     private int remainingBoost = 0;
+    [SerializeField] TextMeshProUGUI boostText;
 
     // grapple
     public GameObject grappleShop;
@@ -23,6 +25,7 @@ public class PlayerController : MonoBehaviour
     public float dashSpeed = 150f;
     public float dashDuration = 0.5f;
     private bool isDashing = false;
+    [SerializeField] TextMeshProUGUI dashText;
 
 
     // item tooltips
@@ -38,6 +41,8 @@ public class PlayerController : MonoBehaviour
         initialGrav = player.gravityScale;
         jetpackShop.SetActive(false);
         grappleShop.SetActive(false);
+        dashText.gameObject.SetActive(false);
+        boostText.gameObject.SetActive(false);
         
         //// Check GameManager for saved jetpack state
         //if (GameManager.Instance.remainingBoost > 0)
@@ -76,9 +81,11 @@ public class PlayerController : MonoBehaviour
                 player.velocity = new Vector2(moveX * speed, player.velocity[1]);
 
                 // For jetpack ability
-                if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) && remainingBoost-- > 0 && hasJetpack)
+                if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) && remainingBoost > 0 && hasJetpack)
                 {
                     player.velocity = new Vector2(moveX * speed * Time.deltaTime, player.velocity[1] * 2);
+                    remainingBoost--;
+                    boostText.text = $"Boost: {remainingBoost}";
                 }
             }
             
@@ -98,16 +105,29 @@ public class PlayerController : MonoBehaviour
     {
         hasJetpack = true;
         jetpackShop.SetActive(true);
+        boostText.gameObject.SetActive(true);
         remainingBoost = boosts;
     }
 
+    public void ResetJetpackUses()
+    {
+        remainingBoost = GameManager.Instance.totalBoost;
+        boostText.text = $"Boost: {remainingBoost}";
+    }
     
 
     public void AcquireGrapple(int dashes)
     {
         hasGrapple = true;
         grappleShop.SetActive(true);
+        dashText.gameObject.SetActive(true);
         remainingDashes = dashes;
+    }
+
+    public void ResetGrappleUses()
+    {
+        remainingDashes = GameManager.Instance.totalDashes;
+        dashText.text = $"Dash: {remainingDashes}";
     }
 
 
@@ -124,7 +144,8 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(dashDuration);
 
         remainingDashes--;
-        
+        dashText.text = $"Dash: {remainingDashes}";
+
         isDashing = false;
     }
 
@@ -141,6 +162,8 @@ public class PlayerController : MonoBehaviour
         //player.gravityScale = initialGrav;
         remainingBoost = GameManager.Instance.totalBoost;
         remainingDashes = GameManager.Instance.totalDashes;
+        dashText.text = $"Dash: {remainingDashes}";
+        boostText.text = $"Boost: {remainingBoost}";
         Time.timeScale = 1;
     }
 

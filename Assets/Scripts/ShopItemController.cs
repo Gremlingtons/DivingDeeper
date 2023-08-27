@@ -59,11 +59,11 @@ public class ShopItem : MonoBehaviour
             // Increase the ability uses
             if (itemType == ItemType.DownwardBooster) 
             { 
-                GameManager.Instance.totalBoost++; 
+                GameManager.Instance.UpgradeJetpack(); 
             }
             if (itemType == ItemType.GrapplingHook) 
             { 
-                GameManager.Instance.totalDashes++; 
+                GameManager.Instance.UpgradeGrapple(); 
             }
 
             // Deduct the cost from the player's money
