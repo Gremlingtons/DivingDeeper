@@ -29,10 +29,10 @@ public class ShatterBarrier : MonoBehaviour
             {
                 player.velocity = new Vector2(player.velocity[0], player.velocity[1] / 8);
                 col.gameObject.SetActive(false);
-                //if (col.gameObject.Equals(finalBarrier))
-                //{
-                //    winScreen.SetActive(true);
-                //}
+                if (col.gameObject.name == "Barrier (Final)")
+                {
+                    GameManager.Instance.SetWinScreen(true);
+                }
             }
             else
             {

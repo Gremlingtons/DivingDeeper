@@ -30,7 +30,7 @@ public class JetpackItem : MonoBehaviour
             {
                 GameManager.Instance.ShowTooltip("You've picked up a jetpack! Press S to use. (press SPACE to resume)");
                 
-                player.AcquireJetpack(initialBoost); 
+                player.AcquireJetpack(++GameManager.Instance.totalBoost); 
             }
             Destroy(gameObject);
 

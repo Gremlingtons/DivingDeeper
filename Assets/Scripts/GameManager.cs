@@ -17,8 +17,8 @@ public class GameManager : MonoBehaviour
     [Tooltip("How much money does the player have?")]
     public int money = 0;
     public bool snared = false;
-    public int remainingBoost = 0;
-    public int remainingDashes = 0;
+    public int totalBoost = 0;
+    public int totalDashes = 0;
 
     public TextMeshProUGUI tooltipJetpack; // Tooltip text
 

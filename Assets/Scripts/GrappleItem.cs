@@ -30,7 +30,7 @@ public class GrappleItem : MonoBehaviour
             { 
                 GameManager.Instance.ShowTooltip("You've picked up a grapple! While holding a or d, press SHIFT to use. (press SPACE to resume)");
                 
-                player.AcquireGrapple(initialDashes);
+                player.AcquireGrapple(++GameManager.Instance.totalDashes);
             }
             Destroy(gameObject);
 

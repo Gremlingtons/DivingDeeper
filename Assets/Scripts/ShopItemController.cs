@@ -56,6 +56,16 @@ public class ShopItem : MonoBehaviour
         // Check if player has enough money and if item isn't at max level
         if (GameManager.Instance.money >= GetCurrentCost() && level < maxLevel)
         {
+            // Increase the ability uses
+            if (itemType == ItemType.DownwardBooster) 
+            { 
+                GameManager.Instance.totalBoost++; 
+            }
+            if (itemType == ItemType.GrapplingHook) 
+            { 
+                GameManager.Instance.totalDashes++; 
+            }
+
             // Deduct the cost from the player's money
             GameManager.Instance.UpdateMoney(-GetCurrentCost());
 

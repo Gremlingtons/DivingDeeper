@@ -12,13 +12,13 @@ public class PlayerController : MonoBehaviour
     public float speed = 3f;
 
     // jetpack
+    public GameObject jetpackShop;
     private bool hasJetpack;
-    private int initialBoost = 1; 
     private int remainingBoost = 0;
-    
+
     // grapple
+    public GameObject grappleShop;
     private bool hasGrapple;
-    private int initialDashes = 1;
     private int remainingDashes = 0;
     public float dashSpeed = 150f;
     public float dashDuration = 0.5f;
@@ -36,18 +36,22 @@ public class PlayerController : MonoBehaviour
         player = GetComponent<Rigidbody2D>();
         initialPos = player.position;
         initialGrav = player.gravityScale;
+        jetpackShop.SetActive(false);
+        grappleShop.SetActive(false);
         
-        // Check GameManager for saved jetpack state
-        if (GameManager.Instance.remainingBoost > 0)
-        {
-            AcquireJetpack(GameManager.Instance.remainingBoost);
-        }
-        // Check GameManager for saved grapple state
-        if (GameManager.Instance.remainingDashes  > 0)
-        {
-            AcquireGrapple(GameManager.Instance.remainingDashes);
-            // GameManager.Instance.UpgradeGrapple(GameManager.Instance.remainingDashes);
-        }
+        //// Check GameManager for saved jetpack state
+        //if (GameManager.Instance.remainingBoost > 0)
+        //{
+        //    AcquireJetpack(GameManager.Instance.remainingBoost);
+        //    jetpackShop.SetActive(true);
+        //}
+        //// Check GameManager for saved grapple state
+        //if (GameManager.Instance.remainingDashes  > 0)
+        //{
+        //    AcquireGrapple(GameManager.Instance.remainingDashes);
+        //    grappleShop.SetActive(true);
+        //    // GameManager.Instance.UpgradeGrapple(GameManager.Instance.remainingDashes);
+        //}
     }
 
     // Update is called once per frame
@@ -72,11 +76,9 @@ public class PlayerController : MonoBehaviour
                 player.velocity = new Vector2(moveX * speed, player.velocity[1]);
 
                 // For jetpack ability
-                if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) && remainingBoost > 0 && hasJetpack)
+                if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) && remainingBoost-- > 0 && hasJetpack)
                 {
                     player.velocity = new Vector2(moveX * speed * Time.deltaTime, player.velocity[1] * 2);
-                    remainingBoost--;
-                    GameManager.Instance.remainingBoost = remainingBoost;
                 }
             }
             
@@ -95,29 +97,17 @@ public class PlayerController : MonoBehaviour
     public void AcquireJetpack(int boosts)
     {
         hasJetpack = true;
+        jetpackShop.SetActive(true);
         remainingBoost = boosts;
-        GameManager.Instance.remainingBoost = boosts;
     }
 
-    public void UpgradeJetpack(int newInitialBoost)
-    {
-        initialBoost = newInitialBoost;
-        remainingBoost = newInitialBoost;
-        GameManager.Instance.remainingBoost = newInitialBoost;
-    }
+    
 
     public void AcquireGrapple(int dashes)
     {
         hasGrapple = true;
+        grappleShop.SetActive(true);
         remainingDashes = dashes;
-        GameManager.Instance.remainingDashes = dashes;
-    }
-
-    public void UpgradeGrapple(int newDashes)
-    {
-        initialDashes = newDashes;
-        remainingDashes =  newDashes;
-        GameManager.Instance.remainingDashes = newDashes;
     }
 
 
@@ -134,7 +124,6 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(dashDuration);
 
         remainingDashes--;
-        GameManager.Instance.remainingDashes = remainingDashes;
         
         isDashing = false;
     }
@@ -150,8 +139,8 @@ public class PlayerController : MonoBehaviour
         player.velocity = new Vector2(0, 0);
 
         //player.gravityScale = initialGrav;
-        remainingBoost = initialBoost;
-        remainingDashes = initialDashes;
+        remainingBoost = GameManager.Instance.totalBoost;
+        remainingDashes = GameManager.Instance.totalDashes;
         Time.timeScale = 1;
     }
 
