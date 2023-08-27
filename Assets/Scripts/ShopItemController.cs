@@ -23,7 +23,7 @@ public class ShopItem : MonoBehaviour
     private int level = 1;
 
     // The maximum level the shop item can reach
-    private const int maxLevel = 3;
+    private const int maxLevel = 5;
 
     // A description for the shop item
     [SerializeField]
@@ -38,8 +38,8 @@ public class ShopItem : MonoBehaviour
     private GameObject textBoxPrefab;
 
     // Reference to the sprite renderer of the shop item for visual effects like fading
-    [SerializeField]
-    private SpriteRenderer itemSpriteRenderer;
+    //[SerializeField]
+    //private SpriteRenderer itemSpriteRenderer;
 
     // A reference to the currently displayed text box for the item details
     private GameObject currentTextBox;
@@ -127,7 +127,7 @@ public class ShopItem : MonoBehaviour
             TMP_Text textComponent = currentTextBox.GetComponentInChildren<TMP_Text>();
 
             // Set the text to display the shop item's details
-            textComponent.text = $"{itemName} (Level {level})\n{description}\nCost: {GetCurrentCost()}";
+            textComponent.text = $"{itemName} (Level {level})\n{description}\nCost: {GetCurrentCost()}\n 'Space' to Buy";
         }
     }
 
@@ -146,7 +146,7 @@ public class ShopItem : MonoBehaviour
     private void FadeItem()
     {
         // Set the color of the shop item's sprite to a faded appearance
-        itemSpriteRenderer.color = new Color(0.5f, 0.5f, 0.5f, 0.5f);
+        //itemSpriteRenderer.color = new Color(0.5f, 0.5f, 0.5f, 0.5f);
     }
 
     // Update method called every frame

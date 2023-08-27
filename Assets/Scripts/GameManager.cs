@@ -16,9 +16,11 @@ public class GameManager : MonoBehaviour
 
     [Tooltip("How much money does the player have?")]
     public int money = 0;
+
     public bool snared = false;
     public int totalBoost = 0;
     public int totalDashes = 0;
+    private int death = 0;
 
     public TextMeshProUGUI tooltipJetpack; // Tooltip text
 
@@ -50,6 +52,7 @@ public class GameManager : MonoBehaviour
     {
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().ResetPlayer();
         GameObject.FindGameObjectWithTag("LoseScreen").GetComponent<LoseScreen>().ShowLoseScreen(false);
+        death++;
         foreach(Transform child in obstacles.transform)
         {
             child.gameObject.SetActive(true);
@@ -71,6 +74,10 @@ public class GameManager : MonoBehaviour
     public void SetWinScreen(bool b)
     {
         winScreen.SetActive(b);
+        if (b)
+        {
+            winScreen.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = $"You reached the bottom in {death} attempts";
+        }
     }
 
     public void SetLoseScreen(bool b)

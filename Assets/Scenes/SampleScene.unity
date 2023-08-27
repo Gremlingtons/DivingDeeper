@@ -5845,7 +5845,6 @@ MonoBehaviour:
   description: Press 'S' to Activate
   baseCost: 2
   textBoxPrefab: {fileID: 4800283056935877830, guid: 338ea6e09a583c64bb12cb6df33c311d, type: 3}
-  itemSpriteRenderer: {fileID: 0}
 --- !u!212 &963596389
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6059,9 +6058,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1658047343}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -261, y: -185}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 100, y: 25}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &993406961
@@ -6260,7 +6259,6 @@ MonoBehaviour:
   description: Press A/D + Shift to Activate
   baseCost: 2
   textBoxPrefab: {fileID: 4800283056935877830, guid: 338ea6e09a583c64bb12cb6df33c311d, type: 3}
-  itemSpriteRenderer: {fileID: 0}
 --- !u!212 &1066434728
 SpriteRenderer:
   m_ObjectHideFlags: 0
